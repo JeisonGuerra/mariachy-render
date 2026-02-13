@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="nofollow">
+    <title>Video: {{video.titulo}}</title>
+    <link rel="stylesheet" href="{% static 'styles/imagen-video.css' %}">
+</head>
+<body>
+    <div class="contenedor">
+        <video controls autoplay src="{{video.video.url}}">Tu navegador no soporta el video</video>
+    </div>
+    <div class="sidebar__form videos">
+        <a href="{% url 'mexicano:proximo_video' vid_id=video.id proxima='false' %}">anterior</a>
+        <a href="{% url 'mexicano:proximo_video' vid_id=video.id proxima='true' %}">siguiente</a>
+    </div>
+    <form>
+        <input type="checkbox" id="open-menu">
+        <label for="open-menu">
+            <div class="label">
+            
+            </div>
+        </label>
+    </form>
+    <div class="close__form">
+        <a href="{% url 'mexicano:index' %}#video">X</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aqui encontrara todos los comentarios de nuestro servicio, la Voz del Mariachy en todo el país Vasco">
+    <meta name="keywords" content="La Voz del Mariachy, comentarios, reseñas, calificaciones, país Vasco, Orlando Batista">
+    <meta name="author" content="Jeison de Jesús Guerra Bernal">
+    <meta name="title" content="La Voz del Mariachy en todo el país Vasco. COMENTARIOS">
+    <title>La Voz del Mariachy en todo el país Vasco. COMENTARIOS</title>
+    <link rel="stylesheet" href="{% static 'styles/resena.css' %}">
+    <link rel="icon" href="{% static 'icono.jpg' %}" type="image/jpg">
+</head>
+<body>
+    <div class="contenedor__header">
+        <h1 class="h2__encabezado">Comentarios</h1>
+        <a href="{% url 'mexicano:index' %}#comentar">Volver</a>
+    </div>
+    <div class="contenedor_resenas">
+        {% for resena in resenas %}
+            <div class="resena">
+                <p><strong>{{resena.nombre}}</strong>( {{resena.fecha}} ):</p>
+                <div>
+                    {% for i in "12345" %}
+                        {% if i|add:0 <= resena.calificacion %}
+                            <span class="estrella">★</span>
+                        {% else %}
+                            <span class="estrella-vacia">☆</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p>{{resena.comentario}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <footer>
+        {% if eslogans %}
+            {% for eslogan in eslogans %}
+                <h3>{{eslogan}}</h3>
+            {% endfor %}
+        {% endif %}
+        <h4>Desarrollador: Jeison Guerra</h4>
+        <h4>contacto: 59736879 -- 55198819</h4>
+        <h5>Numeros de Cuba</h5>
+    </footer>
+</body>
+</html>

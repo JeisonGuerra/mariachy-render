@@ -1,0 +1,97 @@
+body{
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    --color-principal:color-mix(in srgb, #0d1a41 90%, #ccca 10%);
+    --color-text-claro: #fff;
+    --color-fondo: color-mix(in srgb, #ab9b4e5f 90%, #ccc 10%);
+    background-color: var(--color-fondo);
+}
+/*---------Comunes-------*/
+
+.h2__encabezado, .contenedor__header a{
+    background-color: var(--color-principal);
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 100;
+    border-bottom: 0.5px solid #777;
+    color: var(--color-text-claro);
+}
+.contenedor__header a{
+    text-decoration: none;
+    padding: 2px;
+    font-size: 16;
+    width: 80vw;
+    margin: auto;
+}
+.contenedor__header{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max-content, 1fr));
+    text-align: center;
+}
+.noticia{
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+}
+.noticia__img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px 0 #0007;
+}
+.noticia__fecha{
+    margin: 0;
+}
+.noticia__encabezado{
+    margin: 0;
+    color: #000d;
+}
+.noticia__resumen{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 200;
+    text-shadow: 0 0 40px #000f;
+}
+footer{
+    padding: 10px 0;
+    background-color: var(--color-principal);
+    color: var(--color-text-claro);
+}
+footer :is(h3, h4, h5){
+    margin: 10px;
+    text-align: center;
+}
+@media screen and (min-width: 25rem){
+    .noticia{
+        display: grid;
+        grid-template-columns: 1fr 60%;
+        grid-auto-rows: max-content;
+        gap: 10px;
+        margin: 25px 0;
+    }
+    .noticia__img{
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+    .noticia__contenido{
+        width: 100%;
+        margin: 0;
+        text-align: left;
+    }
+}
+@media screen and (min-width: 45rem){
+    .noticia{
+        max-width: 75vw;
+        margin: 25px auto;
+    }
+}
+@media screen and (min-width: 58rem){
+    .noticia{
+        max-width: 60vw;
+    }
+}

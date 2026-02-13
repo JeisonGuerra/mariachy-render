@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aqui encontrara todas las noticias de Orlando Batista, la Voz del Mariachy en todo el país Vasco">
+    <meta name="keywords" content="La Voz del Mariachy, noticias, país Vasco, Orlando Batista">
+    <meta name="author" content="Jeison de Jesús Guerra Bernal">
+    <meta name="title" content="Noticias de la Voz del Mariachy. OFICIAL">
+    <title>La Voz del Mariachy Noticias. OFICIAL</title>
+    <link rel="stylesheet" href="{% static 'styles/noticia.css' %}">
+    <link rel="icon" href="{% static 'icono.jpg' %}" type="image/jpg">
+</head>
+<body>
+    <main class="contenedor__noticias">
+        <div class="contenedor__header">
+            <h1 class="h2__encabezado" >NOTICIAS</h1>
+            <a href="{% url 'mexicano:index' %}">Volver</a>
+        </div>
+        {% for noticia in noticias %}
+            <div id="{{noticia.clave}}" class="noticia">
+                <img class="noticia__img" src="{{noticia.imagen.url}}" alt="{{noticia.alt}}">
+                <div class="noticia__contenido">
+                    <p class="noticia__fecha">{{noticia.fecha|date:'M d, Y H:i'}}</p>
+                    <h3 class="noticia__encabezado">{{noticia.encabezado}}</h3>
+                    <p class="noticia__resumen">{{noticia.noticia|linebreaks}}</p>
+                </div>
+            </div> 
+        {% endfor %}
+    </main>     
+    <footer>
+        {% for eslogan in eslogans %}
+            <h3>{{eslogan}}</h3>
+        {% endfor %}
+        <h4>Desarrollador: Jeison Guerra</h4>
+        <h4>contacto: 59736879 -- 55198819</h4>
+        <h5>Numeros de Cuba</h6>
+    </footer>
+</body>
+</html>

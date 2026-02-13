@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="nofollow">
+    <title>Imagen: {{imagen.alt}}</title>
+    <link rel="stylesheet" href="{% static 'styles/imagen-video.css' %}">
+</head>
+<body>
+    <div class="contenedor">
+        <picture>
+            <source media="(max-width: 400px)" srcset="{{imagen.imagen_small.url}}" alt="{{imagen.alt}}">
+            <img src="{{imagen.imagen.url}}" alt="{{imagen.alt}}">
+        </picture>
+    </div>
+    <div class="sidebar__form imagenes">
+        <a href="{% url 'mexicano:proxima_imagen' img_id=imagen.id proxima='false' %}">anterior</a>
+        <a href="{% url 'mexicano:proxima_imagen' img_id=imagen.id proxima='true' %}">siguiente</a>
+    </div>
+    <form>
+        <input type="checkbox" id="open-menu">
+        <label for="open-menu">
+            <div class="label">
+            
+            </div>
+        </label>
+    </form>
+    <div class="close__form">
+        <a href="{% url 'mexicano:index' %}#foto">X</a>
+    </div>
+</body>
+</html>

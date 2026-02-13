@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página oficial de Orlando Batista, la Voz del Mariachy en España, contacto: 634043607. Tenemos canciones mexicanas, sus últmas noticias y mucho más.">
+    <meta name="keywords" content="La Voz del Mariachy, canciones mexicanas, mexicano España, país Vasco, Orlando Batista, mexicano">
+    <meta name="author" content="Jeison de Jesús Guerra Bernal">
+    <meta name="title" content="La Voz del Mariachy en todo el país Vasco. OFICIAL">
+    <meta name="OG:TITLE" content="La Voz del Mariachy en todo el país Vasco. OFICIAL">
+    <meta name="OG:IMAGE" content="href='{% static "portada.jpg" %}'">
+    <meta name="OG:description" content="Página oficial de Orlando Batista, la Voz del Mariachy en España, contacto: 634043607. Tenemos canciones mexicanas, sus últmas noticias y mucho más.">
+    <title>La Voz del Mariachy en todo el país Vasco. OFICIAL</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="icon" href="{% static 'icono.jpg' %}" type="image/jpg">
+</head>
+<body>
+    <div class="contenedor_general">
+        <header class="contenedor">
+            <form class="sidebar__form">
+                <input type="checkbox" id="open-menu">
+                <label for="open-menu">
+                    <img src="{% static 'menu.png' %}" alt="menu" title="menu_desplegable">
+                </label>
+            </form>
+            <nav>
+                <ul class="nav__lista">
+                    <li class="nav__item">
+                        <a href="#noticia">Noticias</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#cancion">Canciones</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#video">Videos</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#foto">Fotos</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#comentar">Comentar</a>
+                    </li>
+                    <li class="nav__item contratacion">
+                        <a href="#contrato">Contratacion</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="contenedor__noticias-marketing">
+                <div class="contenedor__noticias">
+                    <h2 id='noticia' class="h2__encabezado">ÚLTIMAS NOTICIAS</h2>
+                    {% if noticias %}
+                        {% for noticia in noticias %}
+                            <div class="noticia">
+                                <div class="contededor_noticia__img">
+                                    <img class="noticia__img" src="{{noticia.imagen.url}}" alt="{{noticia.alt}}" loading="lazy">
+                                </div>
+                                <div class="noticia__contenido">
+                                    <p class="noticia__fecha">{{noticia.fecha|date:'M d, Y H:i'}}</p>
+                                    <h3 class="noticia__encabezado">{{noticia.encabezado}}</h3>
+                                    <p class="noticia__resumen">{{noticia|linebreaks}}</p>
+                                    <a class="noticia__enlace" href="{% url 'mexicano:noticias' %}#{{noticia.clave}}">Leer más</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="contenedor__marketing">
+                    {% if marquetings_video %}
+                        {% for video in marquetings_video %}
+                            <video loop autoplay muted src="{{video.video.url}}" loading="lazy" title="{{video}}">Tu navegador no soporta el video</video>
+                        {% endfor %}
+                    {% endif %}
+                    {% if marquetings_foto %}
+                        {% for foto in marquetings_foto %}
+                            <img  src="{{foto.imagen.url}}" alt="{{foto.alt}}" loading="lazy">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+        <section class="contenedor__musica">
+            <h2 id='cancion' class="h2__encabezado">MEJORES CANCIONES</h2>
+            <div class="canciones__lista">
+                {% if canciones %}
+                    {% for cancion in canciones %}
+                        <div class="canciones__elemento"> 
+                            <p>{{cancion}}</p>
+                            <audio controls autoplay muted src="{{cancion.cancion.url}}">Tu navegador no soporta el audio</audio>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </section>
+        <div class="contenedor__fotos-contactos-videos">
+            <section class="contenedor__videos">
+                <h2 id='video' class="h2__encabezado">VIDEOS</h2>
+                <div class="videos__lista">
+                    {% if videos %}
+                        {% for video in videos %}
+                            <div class="video__elemento">
+                                <p>{{video}}</p>
+                                <div class="contenedor__video">
+                                    <a href="{% url 'mexicano:video' video.id %}">
+                                        <video loop autoplay muted src="{{video.video.url}}" loading="lazy" title="{{video}}">Tu navegador no soporta el video</video>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </section>
+            <section class="contenedor__fotos">
+                <h2 id='foto' class="h2__encabezado">GALERÍA</h2>
+                <div class="fotos__lista">
+                    {% if fotos %}
+                        {% for foto in fotos %}
+                            <div class="contenedor__img">
+                                <a href="{% url 'mexicano:imagen' foto.id %}">
+                                    <img  src="{{foto.imagen_small.url}}" alt="{{foto.alt}}" loading="lazy">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </section>
+            <section class="contenedor__comentarios">
+                <h2 id='comentar' class="h2__encabezado">COMENTARIOS</h2>
+                {% if calificacion %}
+                    <strong>Calificacion actual:</strong>
+                    <div>
+                        <span>{{calificacion.calificacion}}</span>
+                        {% for i in "12345" %}
+                            {% if i|add:0 <= calificacion.calificacion_aprox %}
+                                <span class="estrella">★</span>
+                            {% else %}
+                                <span class="estrella-vacia">☆</span>
+                            {% endif %}
+                        {% endfor %}
+                        <span>({{calificacion.cantidad}})</span>
+                    </div>
+                {% endif %}
+                <form action="{% url 'mexicano:index' %}" class="formulario" method="post">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <button name="submit">Enviar</button>
+                </form>
+                <a class="noticia__enlace" href="{% url 'mexicano:resenas' %}">Ver comentarios({{calificacion.cantidad}})</a>
+            </section>
+            <section class="contenedor__contactos">
+                <h2 id='contrato' class="h2__encabezado">CONTRATACIÓN</h2>
+                {% if contratacion %}
+                    {% for contrato in contratacion %}
+                        <p>{{contrato}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% if contactos %}
+                    {% for contacto in contactos %}
+                        <h3>{{contacto}}</h3>
+                    {% endfor %}
+                {% endif %}
+            </section>
+        </div>
+        <footer>
+            {% if eslogans %}
+                {% for eslogan in eslogans %}
+                    <h3>{{eslogan}}</h3>
+                {% endfor %}
+            {% endif %}
+            <h4>Desarrollador: Jeison Guerra</h4>
+            <h4>contacto: 59736879 -- 55198819</h4>
+            <h5>Numeros de Cuba</h5>
+        </footer>
+    </div>
+    <script type="application/ld+json">
+        {
+            "@context":"https://schema.org",
+            "@type":"Service",
+            "name":"La Voz del Mariachy en todo el país Vasco",
+            "image":"{% static 'portada.jpg' %}",
+            "description":"Página oficial de Orlando Batista, la Voz del Mariachy en España, contacto: 634043607. Tenemos canciones mexicanas, sus últmas noticias y mucho más.",
+            "aggregateRating": {
+                "@type":"aggregateRating",
+                "ratingValue":"{{calificacion.calificacion}}",
+                "bestRating":"5",
+                "ratingCount":"{{calificacion.cantidad}}"
+            }
+        }
+    </script>
+</body>
+</html>
