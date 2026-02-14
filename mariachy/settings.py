@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 import os
-SECRET_KEY = os.environ.get('SECRET_KEY', default='krsghtrhutrjhwkljhtlhntkjhn302687h')
+SECRET_KEY = os.enviroment.get('SECRET_KEY', default='krsghtrhutrjhwkljhtlhntkjhn302687h')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'mariachy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
