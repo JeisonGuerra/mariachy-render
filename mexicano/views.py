@@ -5,7 +5,7 @@ from .forms import ResenaForm
 
 def index(request):
     """La pagina de inicio para La Voz del Mariachy"""
-    calific=get_object_or_404(Estrellas, id=2)
+    calific=get_object_or_404(Estrellas, id=1)
     if request.method != 'POST':
         form=ResenaForm()
         noticias=Noticia.objects.all().order_by('-fecha')
